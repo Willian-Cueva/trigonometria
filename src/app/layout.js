@@ -1,7 +1,14 @@
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
+import Navigation from "@/components/navigation";
+import Mates from "@/components/mates";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  weight: "400",
+  subsets: ["latin"],
+  // preload: false
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +18,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={poppins.className}>
+        <Navigation />
+        <Mates>
+          <div className="pt-10 px-8">{children}</div>
+        </Mates>
+      </body>
     </html>
   );
 }
