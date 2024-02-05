@@ -32,9 +32,10 @@ const FuncionesPage = () => {
     let chisContent = <></>;
 
     if (hipo && ca && co) {
-      const co = 8;  // cateto opuesto
-      const ca = 6;  // cateto adyacente
-      const hipo = 10;  // hipotenusa
+      
+      if (hipo<ca || hipo<co) {
+        return toast.warn("El valor de la hipotenusa debe ser mayor o igual a la medida de los catetos");
+      }
 
       const seno = co / hipo;
       const cosecante = 1 / seno;
@@ -67,6 +68,9 @@ const FuncionesPage = () => {
         </>
       );
     } else if (hipo && ca) {
+      if (hipo<ca ) {
+        return toast.warn("El valor de la hipotenusa debe ser mayor o igual a la medida del cateto adyacente");
+      }
       const coseno = ca / hipo;
       const secante = hipo / ca;
       chisContent = (
@@ -76,6 +80,9 @@ const FuncionesPage = () => {
         </>
       );
     } else if (hipo && co) {
+      if (hipo<co ) {
+        return toast.warn("El valor de la hipotenusa debe ser mayor o igual a la medida del cateto opuesto");
+      }
       const seno = co / hipo;
       const cosecante = hipo / co;
       chisContent = (
@@ -102,8 +109,14 @@ const FuncionesPage = () => {
   };
 
   return (
-    <form className="flex flex-col">
+    <div className="flex flex-col items-center">
       <h2 className="text-2xl font-semibold mb-5">Funciones Trigonométricas Básicas</h2>
+      <form className="flex flex-col w-80">
+      <input type="radio" id="triangulo" name="triangulo" value="ref1" />
+      <label htmlFor="triangulo">beta</label>
+      <input type="radio" id="alpha" name="triangulo" value="ref2" />
+      <label htmlFor="triangulo">alpha</label>
+
       <h4 className="text-lg font-medium">Hipotenusa</h4>
       <input type="number" id="hipo" name="hipo" placeholder="Ingrese la medida" />
       <h4 className="text-lg font-medium">Cateto Adyacente</h4>
@@ -118,12 +131,13 @@ const FuncionesPage = () => {
 
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={calcular}>Calcular</button>
 
-      <ToastContainer />
+      <ToastContainer theme="dark"/>
 
       <Popup isOpen={isPopupOpen} onClose={handleTogglePopup}>
         <div className="flex flex-col gap-5">{chis}</div>
       </Popup>
     </form>
+    </div>
   );
 };
 
