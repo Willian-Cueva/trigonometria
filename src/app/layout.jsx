@@ -1,6 +1,5 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import 'reactjs-popup/dist/index.css';
 import "react-toastify/dist/ReactToastify.css";
 import Navigation from "@/components/navigation";
 import Mates from "@/components/mates";
