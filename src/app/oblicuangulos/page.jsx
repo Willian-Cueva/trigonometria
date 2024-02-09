@@ -80,19 +80,19 @@ export default function OblicuangulosPage() {
             <input
               type="number"
               id="ladoA"
-              value={datosTriangulo?.ladoA.toFixed(3)}
+              value={datosTriangulo?.ladoA?.toFixed(3)}
             />
             <h3>Lado b</h3>
             <input
               type="number"
               id="ladoB"
-              value={datosTriangulo?.ladoB.toFixed(3)}
+              value={datosTriangulo?.ladoB?.toFixed(3)}
             />
             <h3>Lado c</h3>
             <input
               type="number"
               id="ladoC"
-              value={datosTriangulo?.ladoC.toFixed(3)}
+              value={datosTriangulo?.ladoC?.toFixed(3)}
             />
           </div>
           <div>
@@ -100,19 +100,19 @@ export default function OblicuangulosPage() {
             <input
               type="number"
               id="anguloA"
-              value={datosTriangulo?.anguloA.toFixed(3)}
+              value={datosTriangulo?.anguloA?.toFixed(3)}
             />
             <h3>Angulo B</h3>
             <input
               type="number"
               id="anguloB"
-              value={datosTriangulo?.anguloB.toFixed(3)}
+              value={datosTriangulo?.anguloB?.toFixed(3)}
             />
             <h3>Angulo C</h3>
             <input
               type="number"
               id="anguloC"
-              value={datosTriangulo?.anguloC.toFixed(3)}
+              value={datosTriangulo?.anguloC?.toFixed(3)}
             />
           </div>
         </div>
