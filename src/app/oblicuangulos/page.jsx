@@ -2,7 +2,7 @@
 import Image from "next/image";
 import trianguloOblicuangulos from "../../../public/assets/images/que-es-un-triangulo-oblicuangulo-4.png";
 import { ToastContainer, toast } from "react-toastify";
-import { calcular } from "../helpers/triangulos_oblicuangulos";
+import { calcular} from "@/helpers/triangulos_oblicuangulos";
 import { useState } from "react";
 import Popup from "@/components/popup";
 import { MathJax } from "better-react-mathjax";
