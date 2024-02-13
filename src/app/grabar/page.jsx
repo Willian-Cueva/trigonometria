@@ -108,8 +108,9 @@ export default function GrabarPage() {
           placeholder="Escriba los pasos"
           onChange={handleStepChange}
         />
-        <button onClick={handleStepsClick}>Añadir paso</button>
-        <button type="submit" onClick={handleSubmit}>
+        <br />
+        <button className="mr-2 bg-blue-600 text-white p-2 rounded-lg" onClick={handleStepsClick}>Añadir paso</button>
+        <button className="bg-green-600 text-white p-2 rounded-lg" type="submit" onClick={handleSubmit}>
           Grabar
         </button>
       </form>
