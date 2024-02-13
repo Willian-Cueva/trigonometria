@@ -10,9 +10,9 @@ const todosLadosLlenos = (ladoA, ladoB, ladoC) => {
   return ladoA && ladoB && ladoC;
 };
 
-const todosAngulosLlenos = (anguloA, anguloB, anguloC) => {
-  return anguloA && anguloB && anguloC;
-};
+// const todosAngulosLlenos = (anguloA, anguloB, anguloC) => {
+//   return anguloA && anguloB && anguloC;
+// };
 
 const hallarAnguloLeyCoseno = (ladoX, ladoY, ladoZ) => {
   const res = Math.acos(
@@ -30,7 +30,7 @@ const hallarLadoLeyCoseno = (anguloX, ladoY, ladoZ) => {
 };
 
 const hallarAnguloLeySeno = (ladoY, anguloX, ladoX) => {
-  const res = Math.asin((ladoY * Math.sin(toRadians(anguloX)) / ladoX));
+  const res = Math.asin((ladoY * Math.sin(toRadians(anguloX))) / ladoX);
   return toDegrees(res);
 };
 
@@ -101,6 +101,10 @@ const obtenerElementoCircular = (arr, i) => {
 export const calcular = (ladoA, ladoB, ladoC, anguloA, anguloB, anguloC) => {
   let procedimiento = [];
 
+  const salirPorError = (error) => {
+    throw new Error(`${error}`);	
+  };
+
   const grabarEnAnguloCorrecto = (i, array) => {
     switch (i) {
       case 0:
@@ -130,12 +134,13 @@ export const calcular = (ladoA, ladoB, ladoC, anguloA, anguloB, anguloC) => {
   const angulos = [anguloA, anguloB, anguloC];
   const lados = [ladoA, ladoB, ladoC];
 
-  const todosAngulosLlenos = (anguloA, anguloB, anguloC) => {
+  const todosAngulosLlenos = () => {
     const sumaAngulos = angulos.reduce((suma, angulo) => suma + angulo, 0);
     const aproximacion180 = 180;
-
-    return !(Math.abs(sumaAngulos - aproximacion180) > 0.0001)
+    const esAproximado = Math.abs(sumaAngulos - aproximacion180) <= 0.5; 
+    return esAproximado;
   };
+  
 
   const grabarEnLadoCorrecto = (i, array) => {
     switch (i) {
@@ -153,11 +158,10 @@ export const calcular = (ladoA, ladoB, ladoC, anguloA, anguloB, anguloC) => {
     }
   };
 
+  // if (anguloA && anguloB && anguloC && !todosAngulosLlenos()) salirPorError("La suma de los angulos es diferente de 180");
+
   if (!ladoA && !ladoB && !ladoC && !anguloA && !anguloB && !anguloC) {
-    const msg = "Todos los datos estan vacios";
-    return {
-      msg,
-    };
+    salirPorError("Todos los datos estan vacios");
   } else if (
     existenAlmenos3DatosLlenos(ladoA, ladoB, ladoC, anguloA, anguloB, anguloC)
   ) {
@@ -306,12 +310,6 @@ export const calcular = (ladoA, ladoB, ladoC, anguloA, anguloB, anguloC) => {
 
       // iteracion de ley de cosenos para hallar los ángulos
       for (let i = 0; i < angulos.length; i++) {
-        // console.log("angulo", angulos[i]);
-        // console.log(
-        // "lados siguientes:",
-        //   obtenerElementoCircular(lados, i),
-        //   obtenerElementoCircular(lados, i + 1)
-        // );
         const ladoIzq = obtenerElementoCircular(lados, i + 1);
         const ladoDer = obtenerElementoCircular(lados, i + 2);
         if (ladoIzq && angulos[i] && ladoDer && !lados[i]) {
@@ -358,39 +356,40 @@ export const calcular = (ladoA, ladoB, ladoC, anguloA, anguloB, anguloC) => {
                 );
                 grabarEnAnguloCorrecto(j, angulos);
                 procedimiento.push(
-                  `$"(Ley Seno para encontrar Ángulos): "${obterLetra(j, true)} = sen^-1((${obterLetra(
-                    j,
-                    false
-                  )}*sen(${obterLetra(i, true)}))/${obterLetra(
-                    i,
-                    false
-                  )})$`
-                );
-                procedimiento.push(
-                  `$  ${obterLetra(
+                  `$"(Ley Seno para encontrar Ángulos): "${obterLetra(
                     j,
                     true
-                  )}"=sin^-1((${redondeo(lados[j])}^2**sin(${redondeo(
-                    angulos[i]
-                  )}))/${redondeo(lados[i])})=${redondeo(angulos[j])} $`
+                  )} = sen^-1((${obterLetra(j, false)}*sen(${obterLetra(
+                    i,
+                    true
+                  )}))/${obterLetra(i, false)})$`
+                );
+                procedimiento.push(
+                  `$  ${obterLetra(j, true)}"=sin^-1((${redondeo(
+                    lados[j]
+                  )}^2**sin(${redondeo(angulos[i])}))/${redondeo(
+                    lados[i]
+                  )})=${redondeo(angulos[j])} $`
                 );
                 rellenarAngulos();
               } else {
                 lados[j] = hallarLadoLeySeno(lados[i], angulos[j], angulos[i]);
                 grabarEnLadoCorrecto(j, lados);
                 procedimiento.push(
-                  `$"(Ley Seno para encontrar Lado): " ${obterLetra(j, false)} = (${obterLetra(
-                    i,
-                    false
-                  )}*sen(${obterLetra(j, true)}))/sin(${obterLetra(i, true)})$`
-                );
-                procedimiento.push(
-                  `$${obterLetra(
+                  `$"(Ley Seno para encontrar Lado): " ${obterLetra(
                     j,
                     false
-                  )}=(${redondeo(lados[i])}**sin(${redondeo(
-                    angulos[j]
-                  )}))/sin(${redondeo(angulos[i])})=${redondeo(lados[j])}$`
+                  )} = (${obterLetra(i, false)}*sen(${obterLetra(
+                    j,
+                    true
+                  )}))/sin(${obterLetra(i, true)})$`
+                );
+                procedimiento.push(
+                  `$${obterLetra(j, false)}=(${redondeo(
+                    lados[i]
+                  )}**sin(${redondeo(angulos[j])}))/sin(${redondeo(
+                    angulos[i]
+                  )})=${redondeo(lados[j])}$`
                 );
               }
               // continue mainLoop;
@@ -403,8 +402,7 @@ export const calcular = (ladoA, ladoB, ladoC, anguloA, anguloB, anguloC) => {
     console.log("sum", sum);
 
     if (sum >= limit) {
-      const msg = "No se pueden formar triángulos con los datos ingresados";
-      return { msg };
+      salirPorError("No se pueden formar triángulos con los datos ingresados");
     }
     // Presentar datos
     // console.log("ladoA:" + ladoA);
@@ -427,7 +425,6 @@ export const calcular = (ladoA, ladoB, ladoC, anguloA, anguloB, anguloC) => {
       procedimiento,
     };
   } else {
-    const msg = "Debe llenar como mínimo 3 campos";
-    return msg;
+    salirPorError("Debe llenar como mínimo 3 campos");
   }
 };

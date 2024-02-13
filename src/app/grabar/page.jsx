@@ -1,7 +1,9 @@
 "use client";
 
+import Teclado from "@/components/teclado";
 import { MathJax } from "better-react-mathjax";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { ToastContainer,toast } from "react-toastify";
 
 export default function GrabarPage() {
   const [title, setTitle] = useState("");
@@ -9,10 +11,12 @@ export default function GrabarPage() {
   const [steps, setSteps] = useState([]);
   const [step, setStep] = useState("");
 
+  const titleRef = useRef(null);
   const stepRef = useRef(null);
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+  const handleTitleChange = () => {
+    const title = titleRef.current.value;
+    setTitle(title);
   };
 
   const handleTypeChange = (e) => {
@@ -49,24 +53,33 @@ export default function GrabarPage() {
 
     if (res) {
       console.log("ejercicio guardado");
+      toast.success("ejercicio guardado")
     }else{
       console.log("ejercicio no guardado");
     }
   };
 
   console.log(title, type, steps);
+  let titleMemo = useMemo(() => <MathJax>{`$${title}$`}</MathJax>, [title]);
+
+  const stepsMemo = useMemo(() => steps.map((step, index) => <MathJax key={index}>{`$${step}$`}</MathJax>), [steps]);
+
+  let stepMemo = useMemo(() => <MathJax>{`$${step}$`}</MathJax>, [step]);
 
   return (
     <div>
+      <ToastContainer/>
       <form>
         <h2 className="text-3xl">Grabadora de ejercicios</h2>
         <h3>Ejercicio</h3>
+        {titleMemo}
         <input
           type="text"
           placeholder="Escriba su ejercicio"
+          ref={titleRef}
           onChange={handleTitleChange}
         />
-        <MathJax>{`$${title}$`}</MathJax>
+        <Teclado referencia={titleRef} onChangeRef={handleTitleChange}/>
         <h3>Tipo de ejercicio</h3>
         <input
           type="radio"
@@ -87,10 +100,8 @@ export default function GrabarPage() {
         />
         <label htmlFor="identidad">Identidad Trigonométrica</label>
         <h3>Pasos</h3>
-        {steps.map((step, index) => (
-          <MathJax key={index}>{`$${step}$`}</MathJax>
-        ))}
-        <MathJax>{`$${step}$`}</MathJax>
+        {stepsMemo}
+        {stepMemo}
         <input
           ref={stepRef}
           type="text"

@@ -2,17 +2,12 @@
 import Image from "next/image";
 import trianguloOblicuangulos from "../../../public/assets/images/que-es-un-triangulo-oblicuangulo-4.png";
 import { ToastContainer, toast } from "react-toastify";
-import { calcular} from "@/helpers/triangulos_oblicuangulos";
+import { calcular } from "@/helpers/triangulos_oblicuangulos";
 import { useState } from "react";
-import Popup from "@/components/popup";
 import { MathJax } from "better-react-mathjax";
 
 export default function OblicuangulosPage() {
   const [datosTriangulo, setDatosTriangulo] = useState(null);
-  const [isPopupOpen, setPopupOpen] = useState(false);
-  const handleTogglePopup = () => {
-    setPopupOpen(!isPopupOpen);
-  };
   const calcularLocal = (e) => {
     e.preventDefault();
     let ladoA = document.getElementById("ladoA").value * 1;
@@ -22,10 +17,14 @@ export default function OblicuangulosPage() {
     let anguloB = document.getElementById("anguloB").value * 1;
     let anguloC = document.getElementById("anguloC").value * 1;
 
-    // console.log(calcular(ladoA, ladoB, ladoC, anguloA, anguloB, anguloC));
-    const result = calcular(ladoA, ladoB, ladoC, anguloA, anguloB, anguloC);
-    setDatosTriangulo(result);
-    handleTogglePopup();
+    try {
+      const result = calcular(ladoA, ladoB, ladoC, anguloA, anguloB, anguloC);
+      setDatosTriangulo(result);
+      toast.success("Triángulo Oblicuángulo calculado exitosamente!");
+    } catch (error) {
+      // console.log(error.message);
+      toast.error(error.message);
+    }
   };
 
   const datosTrianguloSinProcedimiento = JSON.stringify(
@@ -57,25 +56,19 @@ export default function OblicuangulosPage() {
   // calcularLocal();
   console.log("HOla me estoy renderizando xd");
   return (
-    <div>
+    <div className="flex justify-center">
       <ToastContainer />
-      <Popup isOpen={isPopupOpen} onClose={handleTogglePopup}>
-        <div className="flex flex-col gap-5">
-          {datosTriangulo && datosTriangulo.msg
-            ? datosTriangulo.msg
-            : datosTrianguloSinProcedimiento}
-        </div>
-      </Popup>
-      <h2>Triángulos Oblicuángulos</h2>
-      <form>
+      <form className="flex flex-col gap-4 ">
+        <h2 className="text-2xl font-bold">Triángulos Oblicuángulos</h2>
         <Image
           src={trianguloOblicuangulos}
           alt="Oblicuangulos"
           width="auto"
-          height={200}
+          height={180}
+          className="mx-auto"
         />
-        <div className="flex">
-          <div>
+        <div className="flex gap-4">
+          <div className="flex flex-col">
             <h3>Lado a</h3>
             <input
               type="number"
@@ -95,7 +88,7 @@ export default function OblicuangulosPage() {
               value={datosTriangulo?.ladoC?.toFixed(3)}
             />
           </div>
-          <div>
+          <div className="flex flex-col">
             <h3>Angulo A</h3>
             <input
               type="number"
@@ -129,19 +122,17 @@ export default function OblicuangulosPage() {
           Limpiar
         </button>
       </form>
-      <h3>Resultados</h3>
-      <div>
-        <p>
-          {datosTriangulo ? datosTrianguloSinProcedimiento : "Se debe calcular"}
-        </p>
-      </div>
-      <h3>Procedimiento</h3>
-      <div className="flex flex-col">
-        {datosTriangulo?.procedimiento?.map((procedimiento) => (
-          <MathJax className="mb-5" key={procedimiento}>
-            {procedimiento}
-          </MathJax>
-        ))}
+      <div className="flex flex-col ml-4">
+        {datosTriangulo?.procedimiento && (
+          <h3 className="mt-5 text-lg font-bold">Procedimiento</h3>
+        )}
+        <div className="flex flex-col">
+          {datosTriangulo?.procedimiento?.map((procedimiento) => (
+            <MathJax className="mb-5" key={procedimiento}>
+              {procedimiento}
+            </MathJax>
+          ))}
+        </div>
       </div>
     </div>
   );

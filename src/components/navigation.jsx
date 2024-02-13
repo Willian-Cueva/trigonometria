@@ -8,8 +8,9 @@ export default function Navigation() {
     <header className="px-5 py-4">
       <nav className="flex justify-between items-center">
         <Image src={logoUnl} alt="Logo UNL" height="auto" width={180} priority={true}/>
+        <h1 className="text-3xl font-bold hidden md:block">Trigonometría</h1>
         <div className="flex text-[16px] font-semibold ">
-          <Link href="/">Menú Principal</Link>
+          <Link href="/" className="ml-8 hover:underline hover:text-blue-500">Menú Principal</Link>
         </div>
       </nav>
     </header>
