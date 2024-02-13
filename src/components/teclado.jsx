@@ -50,14 +50,6 @@ export default function Teclado({ referencia, onChangeRef }) {
           </mroot>
         </math>
       </button>
-      <button onClick={handleClickTan} name="root(n)(">
-        <math>
-          <mroot>
-            <mi>x</mi>
-            <mn>n</mn>
-          </mroot>
-        </math>
-      </button>
     </div>
   );
 }
