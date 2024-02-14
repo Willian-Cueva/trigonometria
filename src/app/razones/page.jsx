@@ -217,4 +217,4 @@ const RazonesPage = () => {
   );
 };
 
-export default FuncionesPage;
+export default RazonesPage;
