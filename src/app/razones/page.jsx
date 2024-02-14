@@ -7,7 +7,7 @@ import alpha from "@/assets/images/alpha.png";
 import beta from "@/assets/images/beta.png";
 import Image from "next/image";
 
-const FuncionesPage = () => {
+const RazonesPage = () => {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [chis, setChis] = useState(<></>);
 
@@ -152,7 +152,7 @@ const FuncionesPage = () => {
   return (
     <div className="flex flex-col items-center">
       <h2 className="text-2xl font-semibold mb-5">
-        Funciones Trigonométricas Básicas
+        Razones Trigonométricas
       </h2>
       <form className="flex flex-col w-80">
         <input

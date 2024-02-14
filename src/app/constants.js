@@ -1,7 +1,7 @@
 export const links = [
-    { label: "Funciones Trigonométricas", route: "/funciones", src: "/funciones.jpg", alt: "Funciones Trigonométricas" },
+    { label: "Razones Trigonométricas", route: "/razones", src: "/funciones.jpg", alt: "Razones Trigonométricas" },
     { label: "Triángulos Oblicuángulos", route: "/oblicuangulos", src: "/oblicuangulos.jpg", alt: "Triángulos Oblicuángulos" },
     { label: "Grafica de funciones trigonométricas", route: "/graficas", src: "/graficas.jpg", alt: "Grafica de funciones trigonométricas" },
-    { label: "Funciones Inversas", route: "/inversas", src: "/inversas.jpg", alt: "Funciones Inversas" },
+    { label: "Ecuaciones Trigonométricas", route: "/ecuaciones", src: "/inversas.jpg", alt: "Ecuaciones Trigonométricas" },
     { label: "Identidades Trigonométricas", route: "/identidades", src: "/identidades.jpg", alt: "Identidades Trigonométricas" },
   ];
