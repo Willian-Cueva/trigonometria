@@ -9,7 +9,7 @@ export default function Mates({children}) {
       displaystyle: true,
       delimiters: [
         ["$", "$"],
-        ["`", "`"]
+        // ["`", "`"]
       ]
     }
 };
