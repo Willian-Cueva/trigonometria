@@ -60,7 +60,7 @@ export default function GrabarPage() {
   };
 
   console.log(title, type, steps);
-  let titleMemo = useMemo(() => <MathJax>{`${title}`}</MathJax>, [title]);
+  let titleMemo = useMemo(() => <MathJax>{`$${title}$`}</MathJax>, [title]);
 
   const stepsMemo = useMemo(() => steps.map((step, index) => <MathJax key={index}>{`$${step}$`}</MathJax>), [steps]);
 
