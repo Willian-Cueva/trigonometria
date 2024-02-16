@@ -3,14 +3,16 @@ import { useRef, useState } from "react"
 import { MathJax } from "better-react-mathjax"
 import Resolucion from "@/components/resolucion"
 import Teclado from "@/components/teclado"
+import getApiUrl from "@/helpers/api"
 
 export default function BuscarFunciones({title}) {
   const [exp, setExp] = useState('')
   const [resolucion, setResolucion] = useState(null)
   const expresion = useRef(null)
 
-  const handleTitleChange = () => {
-    const title = expresion.current.value
+  const handleTitleChange = (e) => {
+    // const title = expresion.current.value
+    const title = e.target.value  
     setExp(title);
   }
   
@@ -18,7 +20,8 @@ export default function BuscarFunciones({title}) {
   const handleCalcular = async (e) => {
     e.preventDefault();
     const title = expresion.current.value
-    const res = await fetch('http://localhost:3000/api/traer_title', {
+    const apiUrl = getApiUrl("traer_title");
+    const res = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

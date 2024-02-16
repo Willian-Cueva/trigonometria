@@ -1,6 +1,7 @@
 "use client";
 
 import Teclado from "@/components/teclado";
+import getApiUrl from "@/helpers/api";
 import { MathJax } from "better-react-mathjax";
 import { useMemo, useRef, useState } from "react";
 import { ToastContainer,toast } from "react-toastify";
@@ -42,8 +43,9 @@ export default function GrabarPage() {
       type,
       steps
     }
+    const apiUrl = getApiUrl("general");
 
-    const res = fetch("http://localhost:3000/api/general", {
+    const res = fetch(apiUrl, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
