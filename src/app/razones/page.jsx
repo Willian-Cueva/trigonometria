@@ -26,8 +26,6 @@ const RazonesPage = () => {
     ca = ca * 1;
     co = co * 1;
 
-    console.log(hipo, ca, co);
-
     if (!hipo && !ca && !co) {
       return toast.warn(
         "Datos vácios. Debe llenar al menos 2 campos con valores numéricos"
@@ -59,15 +57,6 @@ const RazonesPage = () => {
       const cotangenteGrados = (Math.atan(1 / tangente) * 180) / Math.PI;
       const cosecanteGrados = (Math.asin(1 / cosecante) * 180) / Math.PI;
       const secanteGrados = (Math.acos(1 / secante) * 180) / Math.PI;
-
-      console.log(
-        senoGrados.toFixed(2),
-        cosenoGrados.toFixed(2),
-        tangenteGrados.toFixed(2),
-        cotangenteGrados.toFixed(2),
-        cosecanteGrados.toFixed(2),
-        secanteGrados.toFixed(2)
-      );
 
       chisContent = (
         <>

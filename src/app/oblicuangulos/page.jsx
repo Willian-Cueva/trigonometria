@@ -22,7 +22,7 @@ export default function OblicuangulosPage() {
       setDatosTriangulo(result);
       toast.success("Triángulo Oblicuángulo calculado exitosamente!");
     } catch (error) {
-      // console.log(error.message);
+      console.error(error.message);
       toast.error(error.message);
     }
   };
@@ -53,8 +53,6 @@ export default function OblicuangulosPage() {
     });
   };
 
-  // calcularLocal();
-  console.log("HOla me estoy renderizando xd");
   return (
     <div className="flex justify-center">
       <ToastContainer />

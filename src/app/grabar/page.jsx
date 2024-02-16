@@ -49,17 +49,14 @@ export default function GrabarPage() {
       headers: {
         "Content-Type": "application/json"
       }
-    }).then((res) => res.json()).catch((err) => console.log(err));
+    }).then((res) => res.json()).catch((err) => console.error(err));
 
     if (res) {
-      console.log("ejercicio guardado");
       toast.success("ejercicio guardado")
     }else{
-      console.log("ejercicio no guardado");
+      toast.error("ejercicio no guardado");
     }
   };
-
-  console.log(title, type, steps);
   let titleMemo = useMemo(() => <MathJax>{`$${title}$`}</MathJax>, [title]);
 
   const stepsMemo = useMemo(() => steps.map((step, index) => <MathJax key={index}>{`$${step}$`}</MathJax>), [steps]);

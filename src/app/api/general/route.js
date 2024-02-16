@@ -7,14 +7,13 @@ export async function GET() {
   try {
     await connectDB();
     const inversas = await Ejercicio.find().lean();
-    console.log(inversas);
     return NextResponse.json({
       success: true,
       data: inversas,
       status: 200,
     });
   } catch (error) {
-    console.log("Error api inversas",error);
+    console.error("Error api inversas",error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -23,7 +22,6 @@ export async function POST(request) {
   try {
     await connectDB();
     const data = await request.json();
-    console.log(data);
     const ejercicio = new Ejercicio(data);
     await ejercicio.save();
     return NextResponse.json({
@@ -32,7 +30,7 @@ export async function POST(request) {
       status: 200,
     })
   }catch (error) {
-    console.log("Error api inversas",error);
+    console.error("Error api inversas",error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

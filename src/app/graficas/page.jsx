@@ -67,7 +67,6 @@ export default function GraficasPage() {
         : e.target.value * 1,
     });
     setFuncionTrig(presentarFuncion());
-    console.log(data);
   };
 
   const graficaRef = useRef(null);
@@ -117,14 +116,12 @@ export default function GraficasPage() {
           data.limiteDerecho,
           data.paso
         );
-        console.log(tabla);
 
         setData({
           ...data,
           tabla,
         });
         const K = data.k ? data.k : 10;
-        console.log(K, "<- K");
 
         const minY = tabla.reduce(
           (min, punto) => (punto.y < min ? punto.y : min),

@@ -7,7 +7,6 @@ export default function Resolucion({ title, type, steps, recordar = true }) {
     // Crear un elemento de texto temporal
     try {
       await navigator.clipboard.writeText(title);
-      console.log("Contenido copiado al portapapeles");
       toast.success("Contenido copiado al portapapeles");
     } catch (err) {
       console.error("Error al copiar: ", err);
@@ -33,10 +32,10 @@ export default function Resolucion({ title, type, steps, recordar = true }) {
       <h2 className="mb-2">{recordar ? `tipo: ${type}` : "Pasos:"}</h2>
       <div className="flex flex-col gap-2">
         {steps?.map((step, index) => (
-          <MathJax key={index}>
+          <div key={index}>
             {`${index < steps.length - 1 ? `${index + 1}) ` : `Resultado: `}`}{" "}
             {`$ ${step} $`}
-          </MathJax>
+          </div>
         ))}
       </div>
     </div>

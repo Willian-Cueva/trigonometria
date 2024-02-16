@@ -252,18 +252,6 @@ export const calcular = (ladoA, ladoB, ladoC, anguloA, anguloB, anguloC) => {
           const ladoActual = obtenerElementoCircular(lados, i);
           const ladoSiguiente = obtenerElementoCircular(lados, i + 1);
           const ladoAnterior = obtenerElementoCircular(lados, i + 2);
-          console.log("i -> ", i);
-          console.log(lados);
-          console.log(
-            "angulo Actual",
-            anguloActual,
-            "\nLado Actual",
-            ladoActual,
-            "\nLado siguiente",
-            ladoSiguiente,
-            "\nLado anterior",
-            ladoAnterior
-          );
           if (!angulos[i]) {
             angulos[i] = hallarAnguloLeyCoseno(
               ladoActual,
@@ -301,7 +289,6 @@ export const calcular = (ladoA, ladoB, ladoC, anguloA, anguloB, anguloC) => {
                 ladoAnterior
               )}))=${redondeo(angulos[i])}$`
             );
-            console.log("procedimiento", procedimiento);
             break;
           }
         }
@@ -347,8 +334,6 @@ export const calcular = (ladoA, ladoB, ladoC, anguloA, anguloB, anguloC) => {
             if (i === j) continue;
             if (!((lados[j] && angulos[j]) || (!lados[j] && !angulos[j]))) {
               if (lados[j]) {
-                // console.log("angulo", angulos[j]);
-                // console.log("lados siguientes:", lados[j], lados[i]);
                 angulos[j] = hallarAnguloLeySeno(
                   lados[j],
                   angulos[i],
@@ -399,21 +384,9 @@ export const calcular = (ladoA, ladoB, ladoC, anguloA, anguloB, anguloC) => {
       }
     }
 
-    console.log("sum", sum);
-
     if (sum >= limit) {
       salirPorError("No se pueden formar triángulos con los datos ingresados");
     }
-    // Presentar datos
-    // console.log("ladoA:" + ladoA);
-    // console.log("ladoB:" + ladoB);
-    // console.log("ladoC:" + ladoC);
-
-    // console.log("anguloA:" + anguloA);
-    // console.log("anguloB:" + anguloB);
-    // console.log("anguloC:" + anguloC);
-
-    // console.log("procedimiento:" + procedimiento);
 
     return {
       ladoA,

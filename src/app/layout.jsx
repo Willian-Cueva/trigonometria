@@ -14,11 +14,6 @@ const poppins = Poppins({
 export const metadata = {
   title: "Trigonometría",
   description: `Trigonometría`,
-  manifest: "/manifest.json",
-  icons: {
-    icon: "/icon.png",
-  },
-  themeColor: "#000000",
 };
 
 export default function RootLayout({ children }) {
