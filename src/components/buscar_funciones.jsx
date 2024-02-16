@@ -39,7 +39,7 @@ export default function BuscarFunciones({title}) {
     <div className="flex flex-col text-black">
       <h1 className="text-3xl font-bold">{title}</h1>
       <hr />
-      <MathJax className="my-4">{`$ ${exp} $`}</MathJax>
+      {exp && <MathJax className="my-4">{`$ ${exp} $`}</MathJax>}
       <input ref={expresion} type="text" name="expresion" id="exp" onChange={handleTitleChange} placeholder="Expresión"/>
       <Teclado referencia={expresion} onChangeRef={handleTitleChange} />
       <button onClick={handleCalcular} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Calcular</button>
