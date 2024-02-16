@@ -28,13 +28,21 @@ export default function Resolucion({ title, type, steps, recordar = true }) {
           </button>
         </div>
       )}
-      <hr />      
+      <hr />
       <h2 className="mb-2">{recordar ? `tipo: ${type}` : "Pasos:"}</h2>
       <div className="flex flex-col gap-2">
         {steps?.map((step, index) => (
           <div key={index}>
-            {`${index < steps.length - 1 ? `${index + 1}) ` : `Resultado: `}`}{" "}
-            {`$ ${step} $`}
+            {recordar ? (
+              <div key={index}>{step}</div>
+            ) : (
+              <MathJax>
+                {`${
+                  index < steps.length - 1 ? `${index + 1}) ` : `Resultado: `
+                }`}{" "}
+                {`$ ${step} $`}
+              </MathJax>
+            )}
           </div>
         ))}
       </div>
